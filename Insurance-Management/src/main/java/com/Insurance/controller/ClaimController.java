@@ -5,8 +5,9 @@ import com.Insurance.service.ClaimService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -31,13 +32,19 @@ public class ClaimController {
     }
 
     @PostMapping
-    public ResponseEntity<InsuranceClaim> createClaim(@RequestBody InsuranceClaim claim) {
+    public ResponseEntity<?> createClaim(@Validated @RequestBody InsuranceClaim claim, BindingResult result) {
+        if (result.hasErrors()) {
+            return new ResponseEntity<>(result.getAllErrors(), HttpStatus.BAD_REQUEST);
+        }
         InsuranceClaim createdClaim = claimService.createClaim(claim);
         return new ResponseEntity<>(createdClaim, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<InsuranceClaim> updateClaim(@PathVariable Long id, @RequestBody InsuranceClaim claim) {
+    public ResponseEntity<?> updateClaim(@PathVariable Long id, @Validated @RequestBody InsuranceClaim claim, BindingResult result) {
+        if (result.hasErrors()) {
+            return new ResponseEntity<>(result.getAllErrors(), HttpStatus.BAD_REQUEST);
+        }
         InsuranceClaim updatedClaim = claimService.updateClaim(id, claim);
         if (updatedClaim == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -47,11 +54,17 @@ public class ClaimController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteClaim(@PathVariable Long id) {
-        ClaimController claimsService;
         boolean deleted = claimService.deleteClaim(id);
         if (!deleted) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    // Exception handling
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<?> handleException(Exception ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
 }
