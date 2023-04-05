@@ -20,17 +20,16 @@ public class InsurancePolicy {
     private LocalDate startDate;
     private LocalDate endDate;
 
-    @ManyToOne
-    private Client client;
+    public InsurancePolicy() {
+    }
 
     public InsurancePolicy(String policyNumber, String type, double coverageAmount,
-                           double premium, LocalDate startDate, LocalDate endDate, Client client) {
+                           double premium, LocalDate startDate, LocalDate endDate) {
         this.policyNumber = policyNumber;
         this.type = type;
         this.coverageAmount = coverageAmount;
         this.premium = premium;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.client = client;
     }
 }

@@ -18,18 +18,14 @@ public class InsuranceClaim {
     private LocalDate claimDate;
     private String claimStatus;
 
-    @ManyToOne
-    private InsurancePolicy insurancePolicy;
     public InsuranceClaim() {
     }
 
-    public InsuranceClaim(Integer claimNumber, String description, LocalDate claimDate, String claimStatus,
-                          InsurancePolicy insurancePolicy) {
+    public InsuranceClaim(Integer claimNumber, String description, LocalDate claimDate, String claimStatus) {
         this.claimNumber = claimNumber;
         this.description = description;
         this.claimDate = claimDate;
         this.claimStatus = claimStatus;
-        this.insurancePolicy = insurancePolicy;
     }
 
 }
