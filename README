@@ -1,0 +1,40 @@
+The Insurance Management Platform is a web-based application that allows users to manage insurance policies, clients, and claims. The application is built using Spring Boot and Java with Spring Web, Spring Data JPA, and an embedded H2 database. The application supports CRUD operations for clients, policies, and claims.
+
+Project Structure:
+The project follows the standard Spring Boot project structure. The main application class is located in the com.Insurance package, and the controllers, services, repositories, and models are organized into separate packages for easy navigation.
+
+Features:
+The application provides RESTful APIs for managing clients, policies, and claims. Users can perform the following actions through the API endpoints:
+
+Clients
+
+- Fetch all clients.
+- Fetch a specific client by ID.
+- Create a new client.
+- Update a client's information.
+- Delete a client.
+
+Insurance Policies:
+
+- Fetch all insurance policies.
+- Fetch a specific insurance policy by ID.
+- Create a new insurance policy.
+- Update an insurance policy.
+- Delete an insurance policy.
+
+Claims:
+
+- Fetch all claims.
+- Fetch a specific claim by ID.
+- Create a new claim.
+- Update a claim's information.
+- Delete a claim.
+
+To run the application locally, follow these steps:
+1. git clone https://github.com/KaranGurnani32/Insurance-Mangement-Project.git
+2. Open the project in your IDE.
+3. Run the main application class.
+4. Open PostMan and use following links :
+- http://localhost:8080/api/clients
+- http://localhost:8080/api/policies
+-http://localhost:8080/api/claims
