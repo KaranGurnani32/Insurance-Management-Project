@@ -1,7 +1,7 @@
 package com.Insurance.controller;
 
 import com.Insurance.model.InsuranceClaim;
-import com.Insurance.service.ClaimService;
+import com.Insurance.service.InsuranceClaimService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,9 +12,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/claims")
-public class ClaimController {
+public class InsuranceClaimController {
     @Autowired
-    private ClaimService claimService;
+    private InsuranceClaimService claimService;
 
     @GetMapping
     public ResponseEntity<List<InsuranceClaim>> getAllClaims() {

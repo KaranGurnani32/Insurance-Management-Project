@@ -6,30 +6,26 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Data;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Data
 public class Client {
 
-//    Client: Represents a client with properties such as name, date of birth, address,
-//    and contact information.
-
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
-    private String dob;
+    private LocalDate dateOfBirth;
     private String address;
     private String contactInfo;
 
+    public Client() {
+    }
 
-    public Client() {}
-
-    public Client(String name, String dob, String address, String contactInfo) {
+    public Client(String name, LocalDate dateOfBirth, String address, String contactInfo) {
         this.name = name;
-        this.dob = dob;
+        this.dateOfBirth = dateOfBirth;
         this.address = address;
         this.contactInfo = contactInfo;
     }

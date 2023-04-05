@@ -14,26 +14,25 @@ import java.util.List;
 @RequestMapping("/api/clients")
 public class ClientController {
 
-    @Autowired
-    private ClientService clientService;
+    private final ClientService clientService;
 
-    // Fetch all clients
-    @GetMapping
-    public List<Client> getAllClients() {
-        return clientService.getAllClients();
+    @Autowired
+    public ClientController(ClientService clientService) {
+        this.clientService = clientService;
     }
 
-    // Fetch a specific client by ID
+    @GetMapping
+    public ResponseEntity<List<Client>> getAllClients() {
+        List<Client> clients = clientService.getAllClients();
+        return new ResponseEntity<>(clients, HttpStatus.OK);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Client> getClientById(@PathVariable Long id) {
         Client client = clientService.getClientById(id);
-        if (client == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
         return new ResponseEntity<>(client, HttpStatus.OK);
     }
 
-    // Create a new client
     @PostMapping
     public ResponseEntity<?> createClient(@Validated @RequestBody Client client, BindingResult result) {
         if (result.hasErrors()) {
@@ -43,26 +42,18 @@ public class ClientController {
         return new ResponseEntity<>(createdClient, HttpStatus.CREATED);
     }
 
-    // Update a client's information
     @PutMapping("/{id}")
     public ResponseEntity<?> updateClient(@PathVariable Long id, @Validated @RequestBody Client client, BindingResult result) {
         if (result.hasErrors()) {
             return new ResponseEntity<>(result.getAllErrors(), HttpStatus.BAD_REQUEST);
         }
         Client updatedClient = clientService.updateClient(id, client);
-        if (updatedClient == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
         return new ResponseEntity<>(updatedClient, HttpStatus.OK);
     }
 
-    // Delete a client
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteClient(@PathVariable Long id) {
-        boolean deleted = clientService.deleteClient(id);
-        if (!deleted) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+    public ResponseEntity<?> deleteClient(@PathVariable Long id) {
+        clientService.deleteClient(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
@@ -71,5 +62,6 @@ public class ClientController {
     public ResponseEntity<?> handleException(Exception ex) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
 }
 

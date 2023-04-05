@@ -1,7 +1,7 @@
 package com.Insurance.controller;
 
 import com.Insurance.model.InsurancePolicy;
-import com.Insurance.service.PolicyService;
+import com.Insurance.service.InsurancePolicyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,9 +11,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/policies")
-public class PolicyController {
+public class InsurancePolicyController {
     @Autowired
-    private PolicyService policyService;
+    private InsurancePolicyService policyService;
 
     // Fetch all insurance policies
     @GetMapping

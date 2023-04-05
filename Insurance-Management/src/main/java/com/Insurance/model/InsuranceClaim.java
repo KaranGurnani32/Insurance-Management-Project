@@ -4,29 +4,27 @@ package com.Insurance.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Data
 public class InsuranceClaim {
 
-//    Represents an insurance claim with properties like claim number,
-//    description, claim date, and claim status. Each claim should be associated with
-//    an insurance policy.
-
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String claimNumber;
+    private Integer claimNumber;
     private String description;
-    private String claimDate;
+    private LocalDate claimDate;
     private String claimStatus;
 
     @ManyToOne
-    @JoinColumn(name = "policy_id")
     private InsurancePolicy insurancePolicy;
+    public InsuranceClaim() {
+    }
 
-    public InsuranceClaim(String claimNumber, String description, String claimDate, String claimStatus, InsurancePolicy insurancePolicy) {
+    public InsuranceClaim(Integer claimNumber, String description, LocalDate claimDate, String claimStatus,
+                          InsurancePolicy insurancePolicy) {
         this.claimNumber = claimNumber;
         this.description = description;
         this.claimDate = claimDate;

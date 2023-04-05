@@ -1,37 +1,36 @@
 package com.Insurance.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
 @Data
 public class InsurancePolicy {
-
-    // Represents an insurance policy with properties like policy
-    //number, type, coverage amount, premium, start date, and end date. Each policy
-    //should be associated with a client.
-
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Integer policyNumber;
-    private String policyType;
-    private Double coverageAmount;
-    private Double premium;
-    private String startDate;
-    private String endDate;
 
-    public InsurancePolicy(Integer policyNumber, String policyType, Double coverageAmount, Double premium, String startDate, String endDate) {
+    private String policyNumber;
+    private String type;
+    private double coverageAmount;
+    private double premium;
+    private LocalDate startDate;
+    private LocalDate endDate;
+
+    @ManyToOne
+    private Client client;
+
+    public InsurancePolicy(String policyNumber, String type, double coverageAmount,
+                           double premium, LocalDate startDate, LocalDate endDate, Client client) {
         this.policyNumber = policyNumber;
-        this.policyType = policyType;
+        this.type = type;
         this.coverageAmount = coverageAmount;
         this.premium = premium;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.client = client;
     }
 }
