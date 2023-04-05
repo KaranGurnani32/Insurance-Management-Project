@@ -1,7 +1,7 @@
 The Insurance Management Platform is a web-based application that allows users to manage insurance policies, clients, and claims. The application is built using Spring Boot and Java with Spring Web, Spring Data JPA, and an embedded H2 database. The application supports CRUD operations for clients, policies, and claims.
 
 Project Structure:
-The project follows the standard Spring Boot project structure. The main application class is located in the com.Insurance package, and the controllers, services, repositories, and models are organized into separate packages for easy navigation.
+The project follows the standard Spring Boot project structure. The main application class is located in the com.Insurance package, and the controllers, services, and models are organized into separate packages for easy navigation.
 
 Features:
 The application provides RESTful APIs for managing clients, policies, and claims. Users can perform the following actions through the API endpoints:
